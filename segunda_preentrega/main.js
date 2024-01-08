@@ -1,34 +1,72 @@
-//objetivo:hacer un script que le pregunte al usuario que quiere comprar y le de el producto y el precio del mismo
+const listaDeCompras = {
+    articulos: [],
 
-alert("Bienvenido a la tienda Mundo moda, a continuacion se le mostrara un repertorio de ropa para comprar");
-
-let producto = Number(prompt("Ingrese el numero del producto que desea comprar: Camisa: 0 Pantalon: 1 Zapatos: 2 Medias: 3"));
-
-const Ropa = [
-    {
-        Nombre: "Camisa",
-        Precio: 1500,
+    agregarArticulo: function (articulo) {
+        this.articulos.push(articulo);
+        return `${articulo} ha sido agregado a la lista.`;
     },
-    {
-        Nombre: "Pantalon",
-        Precio: 2500,
-    },
-    {
-        Nombre: "Zapatos",
-        Precio: 3000,
-    },
-    {
-        Nombre: "Medias",
-        Precio: 500,
-    },
-];
 
-if (producto >= 0 && producto < Ropa.length) {
-    alert("Producto seleccionado: " + Ropa[producto].Nombre + "\nPrecio: $" + Ropa[producto].Precio);
-} else {
-    alert("Número de producto no válido. Por favor, elija un número entre 0 y " + (Ropa.length - 1));}
+    quitarArticulo: function (articulo) {
+        const index = this.articulos.indexOf(articulo);
+        if (index !== -1) {
+            this.articulos.splice(index, 1);
+            return `${articulo} ha sido eliminado de la lista.`;
+        } else {
+            return `${articulo} no se encuentra en la lista.`;
+        }
+    },
 
+    verificarExistencia: function (articulo) {
+        if (this.articulos.includes(articulo)) {
+            return `${articulo} existe en la lista.`;
+        } else {
+            return `${articulo} no existe en la lista.`;
+        }
+    },
 
+    mostrarLista: function () {
+        let result = "\nLista de Artículos:\n";
+        this.articulos.forEach((articulo, index) => {
+            result += `${index + 1}. ${articulo}\n`;
+        });
+        return result.trim();
+    }
+};
+
+function realizarAccion() {
+    const opcionSeleccionada = document.getElementById("opcion").value;
+    let resultado = "";
+
+    switch (opcionSeleccionada) {
+        case "1":
+            const nuevoArticulo = prompt("Ingrese el nuevo artículo:");
+            resultado = listaDeCompras.agregarArticulo(nuevoArticulo);
+            break;
+
+        case "2":
+            const articuloEliminar = prompt("Ingrese el artículo a eliminar:");
+            resultado = listaDeCompras.quitarArticulo(articuloEliminar);
+            break;
+
+        case "3":
+            const articuloVerificar = prompt("Ingrese el artículo a verificar:");
+            resultado = listaDeCompras.verificarExistencia(articuloVerificar);
+            break;
+
+        case "4":
+            resultado = listaDeCompras.mostrarLista();
+            break;
+
+        case "0":
+            resultado = "Saliendo del programa. ¡Hasta luego!";
+            break;
+
+        default:
+            resultado = "Opción no válida. Inténtelo de nuevo.";
+    }
+
+    document.getElementById("output").textContent = resultado;
+}
 
 
 

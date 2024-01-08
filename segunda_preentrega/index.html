@@ -1,11 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="./main.js"></script>
+    <title>Lista de Compras</title>
 </head>
+
 <body>
+    <div>
+        <label for="opcion">Elija una opción:</label>
+        <select id="opcion">
+            <option value="1">Agregar artículo</option>
+            <option value="2">Quitar artículo</option>
+            <option value="3">Verificar existencia de un artículo</option>
+            <option value="4">Mostrar lista de artículos</option>
+            <option value="0">Salir</option>
+        </select>
+        <button onclick="realizarAccion()">Realizar Acción</button>
+    </div>
+    <div id="output"></div>
+
+    <script src="./main.js">
+    </script>
 </body>
+
 </html>
